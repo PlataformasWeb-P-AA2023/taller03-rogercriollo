@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+</html>
+ 
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css"
+    />
+
+   
+  </head>
+  <body>
+    <div class="content">
+      <form name="my-form" action="" method="post">
+        <div class="input">
+          <label for="nombre">Nombres</label>
+          <input type="text" id="nombre" placeholder="ingrese datos " />
+        </div>
+
+        <div class="input">
+          <label for="apellido">apellidos</label>
+          <input type="text" id="apellido" placeholder="ingresa datos" />
+        </div>
+
+        <div class="input">
+          <label for="fecha">fecha</label>
+          <input type="text" id="fecha" placeholder="ingresa datos" />
+        </div>
+        <div class="mensaje">
+            
+
+        </div>
+
+        <button type="submit">enviar datos </button>
+        
+      </form>
+    </div>
+
+    <div class="mensage">
+      <h1>Datos Ingresados:</h1>
+
+      <p id="nametag">Nombres:</p>
+      <p id="lnametag">Apellidos:</p>
+      <p id="datetag">Fecha:</p>
+    </div>
+  </body>
+
+  <script>
+    let form = document.forms["my-form"];
+    form.addEventListener("submit", getValues);
+
+    function getValues(event) {
+      event.preventDefault();
+      let nombre = document.querySelector("#nombre");
+      let apellido = document.querySelector("#apellido");
+      let fecha = document.querySelector("#fecha");
+
+      console.log(nombre.value, apellido.value, fecha.value);
+      setData();
+    }
+
+    $(function () {
+      $("#fecha").datepicker();
+    });
+
+    function setData() {
+      document.querySelector("#nametag").append(nombre.value);
+      document.querySelector("#lnametag").append(apellido.value);
+      document.querySelector("#datetag").append(fecha.value);
+    }
+    setData();
+  </script>
+</html>
+

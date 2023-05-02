@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Busqueda</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  
+  </head>
+
+  <body>
+    <h1>Datos a presentar :</h1>
+
+    
+    <p id="mensaje">
+    </p>
+    <button type="submit " class="obtener" id="obtener">Obtener Datos</button>
+
+    
+
+    <div id="dataload"></div>
+  </body>
+
+  <script>
+    let cont = document.querySelector("#dataload");
+    $("button").click(function () {
+      url =
+        "https://pkgstore.datahub.io/core/country-codes/country-codes_json/data/616b1fb83cbfd4eb6d9e7d52924bb00a/country-codes_json.json";
+
+      $.get(url, (data, status) => {
+        for (let d of data) {
+          let div = document.createElement("div");
+
+          div.className = "card";
+
+          cons = document.createElement("p");
+          cons.innerHTML =
+            `<b>Country's customary English short name (CLDR):</b> ` +
+            d["CLDR display name"];
+          div.appendChild(cons);
+
+          cons = document.createElement("p");
+          cons.innerHTML = `<b>Capital city from Geonames:</b> ` + d["Capital"];
+          div.appendChild(cons);
+
+          cons = document.createElement("p");
+          cons.innerHTML =
+            `<b>Codes from the U.S. standard FIPS PUB 10-4:</b> ` + d["FIPS"];
+          div.appendChild(cons);
+
+          cons = document.createElement("p");
+          cons.innerHTML =
+            `<b>Codes assigned by the Fédération Internationale de Football Association</b>: ` +
+            d["FIFA"];
+          div.appendChild(cons);
+
+          cons = document.createElement("p");
+          cons.innerHTML = `<b>Continent from Geonames:</b> ` + d["Continent"];
+          div.appendChild(cons);
+
+          cons = document.createElement("p");
+
+          let ul = document.createElement("ul");
+
+          if (isNaN(d["Languages"])) {
+            for (let l of d["Languages"].split(",")) {
+              let li = document.createElement("li");
+              li.innerText = l;
+              ul.appendChild(li);
+            }
+          } else {
+            let li = document.createElement("li");
+            li.innerText = "no language";
+            ul.appendChild(li);
+        }
+
+cons.innerHTML = `<b>Languages from Geonames: </b>`;
+div.appendChild(cons);
+div.appendChild(ul);
+
+cons = document.createElement("p");
+cons.innerHTML = `<b>Geoname ID:</b>: ` + d["Geoname ID"];
+div.appendChild(cons);
+
+cons = document.createElement("p");
+cons.innerHTML =
+  ` <b>Distinguishing signs of vehicles in international traffic:</b> ` +
+  d["DS"];
+div.appendChild(cons);
+cont.appendChild(div);
+}
+});
+});
+  </script>
+</html>
